@@ -27,5 +27,22 @@ services:
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: rootpassword
 
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php_app
+    restart: always
+    ports:
+      - "9000:9000"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: testdb
+      DB_USERNAME: testuser
+      DB_PASSWORD: testpass
+    volumes:
+      - ./php/src:/var/www/html
+
 volumes:
   mysql_data:
